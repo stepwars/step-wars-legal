@@ -10,72 +10,177 @@
             padding: 0;
             box-sizing: border-box;
         }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: #f5f5f7;
-            padding: 20px;
+            color: #1d1d1f;
+            background: #0E0F14;
         }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            padding: 60px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .last-updated {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .nav {
+            background: #1A1B26;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .nav a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 16px;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .nav a:hover {
+            opacity: 0.7;
+        }
+
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 60px 40px;
+            border-radius: 0;
         }
-        h1 {
-            font-size: 32px;
-            margin-bottom: 8px;
-            color: #1d1d1f;
+
+        @media (min-width: 768px) {
+            .container {
+                margin: 40px auto;
+                border-radius: 20px;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            }
         }
-        .last-updated {
-            color: #86868b;
-            font-size: 14px;
-            margin-bottom: 32px;
-        }
+
         h2 {
-            font-size: 24px;
-            margin-top: 32px;
+            font-size: 28px;
+            margin-top: 48px;
             margin-bottom: 16px;
             color: #1d1d1f;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #667eea;
         }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
         p {
             margin-bottom: 16px;
             color: #1d1d1f;
+            font-size: 16px;
         }
-        ul {
+
+        ul, ol {
             margin-bottom: 16px;
             padding-left: 24px;
         }
+
         li {
             margin-bottom: 8px;
+            color: #1d1d1f;
         }
+
         a {
-            color: #0071e3;
+            color: #667eea;
             text-decoration: none;
+            font-weight: 600;
         }
+
         a:hover {
             text-decoration: underline;
         }
-        .contact {
-            background: #f5f5f7;
-            padding: 16px;
-            border-radius: 8px;
-            margin-top: 32px;
-        }
+
         strong {
+            color: #1d1d1f;
             font-weight: 600;
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 32px;
+            border-radius: 16px;
+            margin-top: 48px;
+        }
+
+        .contact-box h2 {
+            color: white;
+            margin-top: 0;
+            border: none;
+            padding-bottom: 0;
+        }
+
+        .contact-box p {
+            color: white;
+            opacity: 0.95;
+        }
+
+        .contact-box a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .contact-box a:hover {
+            opacity: 0.8;
+        }
+
+        footer {
+            background: #0E0F14;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer a {
+            color: #667eea;
+            margin: 0 12px;
+        }
+
+        .footer-links {
+            margin-bottom: 20px;
+        }
+
+        .copyright {
+            color: #86868b;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="header">
         <h1>Terms of Service</h1>
         <p class="last-updated">Last updated: May 8, 2026</p>
+    </div>
 
-        <p>Welcome to Step Wars Challenge. These Terms of Service ("Terms") govern your access to and use of the Step Wars Challenge mobile application (the "App") operated by Tyler A ("we," "us," or "our").</p>
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="support.html">Support</a>
+    </div>
+
+    <div class="container">
+        <p>Welcome to Step Wars Challenge. These Terms of Service ("Terms") govern your access to and use of the Step Wars Challenge mobile application (the "App") operated by Tyler A. ("we," "us," or "our").</p>
 
         <p>By creating an account or using the App, you agree to be bound by these Terms. If you do not agree to these Terms, do not use the App.</p>
 
@@ -147,7 +252,7 @@
         </ul>
 
         <h2>8. Intellectual Property</h2>
-        <p>The App, including all content, features, and functionality, is owned by Tyler A and is protected by copyright, trademark, and other intellectual property laws. You are granted a limited, non-exclusive, non-transferable license to use the App for personal, non-commercial purposes.</p>
+        <p>The App, including all content, features, and functionality, is owned by Tyler A. and is protected by copyright, trademark, and other intellectual property laws. You are granted a limited, non-exclusive, non-transferable license to use the App for personal, non-commercial purposes.</p>
         <p>You may not:</p>
         <ul>
             <li>Copy, modify, or distribute the App or its content</li>
@@ -161,7 +266,7 @@
         <p><strong>Service Availability:</strong> We do not guarantee that the App will be available at all times or free from interruptions, delays, or errors.</p>
 
         <h2>10. Limitation of Liability</h2>
-        <p>To the fullest extent permitted by law, Tyler A shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses resulting from:</p>
+        <p>To the fullest extent permitted by law, Tyler A. shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses resulting from:</p>
         <ul>
             <li>Your use or inability to use the App</li>
             <li>Any unauthorized access to or use of our servers or your data</li>
@@ -170,7 +275,7 @@
         </ul>
 
         <h2>11. Indemnification</h2>
-        <p>You agree to indemnify and hold harmless Tyler A from any claims, damages, losses, liabilities, and expenses (including legal fees) arising from your use of the App or violation of these Terms.</p>
+        <p>You agree to indemnify and hold harmless Tyler A. from any claims, damages, losses, liabilities, and expenses (including legal fees) arising from your use of the App or violation of these Terms.</p>
 
         <h2>12. Termination</h2>
         <p>We reserve the right to suspend or terminate your account at any time, with or without notice, for any reason, including if we believe you have violated these Terms.</p>
@@ -187,14 +292,24 @@
         <p>If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions will continue in full force and effect.</p>
 
         <h2>16. Entire Agreement</h2>
-        <p>These Terms, together with our Privacy Policy, constitute the entire agreement between you and Tyler A regarding the App and supersede all prior agreements and understandings.</p>
+        <p>These Terms, together with our Privacy Policy, constitute the entire agreement between you and Tyler A. regarding the App and supersede all prior agreements and understandings.</p>
 
-        <div class="contact">
+        <div class="contact-box">
             <h2>Contact Us</h2>
-            <p>If you have any questions about these Terms, please contact us at:</p>
+            <p>If you have any questions about these Terms, please contact us:</p>
             <p><strong>Email:</strong> <a href="mailto:support@stepwarschallenge.com">support@stepwarschallenge.com</a></p>
-            <p><strong>Developer:</strong> Tyler A</p>
+            <p><strong>Developer:</strong> Tyler A.</p>
         </div>
     </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="support.html">Support</a>
+        </div>
+        <p class="copyright">&copy; 2026 Tyler A. All rights reserved.</p>
+    </footer>
 </body>
 </html>
