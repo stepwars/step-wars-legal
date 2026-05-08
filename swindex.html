@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Turn your daily steps into weekly battles. Compete in ranked leagues, climb the tiers, and prove you're the ultimate walker.">
+    <title>Step Wars Challenge - Turn Steps Into Competition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #1d1d1f;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 8vw, 72px);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .hero .tagline {
+            font-size: clamp(18px, 3vw, 28px);
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .coming-soon-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: #0E0F14;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #86868b;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+
+        /* How It Works Section */
+        .section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 20px;
+            color: #86868b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px;
+            border-radius: 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            pointer-events: none;
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .feature-description {
+            font-size: 16px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Competition Showcase */
+        .competition-showcase {
+            background: #0E0F14;
+            padding: 100px 20px;
+            color: white;
+        }
+
+        .showcase-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .showcase-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .showcase-text h2 {
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #667eea, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .showcase-text p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #b8b8b8;
+            margin-bottom: 16px;
+        }
+
+        .highlight {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* League Preview */
+        .league-preview {
+            background: #1A1B26;
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .league-header {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #86868b;
+            margin-bottom: 8px;
+        }
+
+        .league-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #CD7F32, #E8A87C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .rank-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .rank-item:last-child {
+            border-bottom: none;
+        }
+
+        .rank-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .rank-number {
+            font-size: 18px;
+            font-weight: 700;
+            color: #667eea;
+            min-width: 30px;
+        }
+
+        .rank-username {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .rank-steps {
+            font-size: 18px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .promotion-zone {
+            color: #4ade80;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 16px;
+            text-align: center;
+        }
+
+        /* App Screenshots */
+        .screenshots {
+            padding: 100px 20px;
+            background: linear-gradient(180deg, white 0%, #f5f5f7 100%);
+        }
+
+        .screenshots-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .screenshot {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .screenshot:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.15);
+        }
+
+        .screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .screenshot-placeholder {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            aspect-ratio: 9/19.5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            padding: 100px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .cta-section p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        footer {
+            background: #0E0F14;
+            padding: 60px 20px 40px;
+            color: white;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: white;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: #86868b;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: #86868b;
+            font-size: 14px;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="coming-soon-badge">Coming Soon to iOS</div>
+            <h1>Turn Your Steps<br>Into Competition</h1>
+            <p class="tagline">Weekly leagues. Real opponents. Ranked progression. Your daily walk just got competitive.</p>
+            <div class="cta-group">
+                <a href="#notify" class="btn-primary">Get Notified at Launch</a>
+                <a href="#features" class="btn-secondary">See How It Works</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat">
+            <div class="stat-number">20</div>
+            <div class="stat-label">Players Per League</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">4</div>
+            <div class="stat-label">Activity Tiers</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">7</div>
+            <div class="stat-label">Days to Prove Yourself</div>
+        </div>
+    </div>
+
+    <!-- How It Works Section -->
+    <section class="section" id="features">
+        <div class="section-header">
+            <h2 class="section-title">Simple Concept. Endless Competition.</h2>
+            <p class="section-subtitle">Sync your steps. Get matched. Compete weekly. Climb the ranks.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title">Weekly Leagues</h3>
+                <p class="feature-description">Every Monday, face 19 new opponents. Top 4 get promoted. Bottom 4 risk demotion. The middle stays safe. It's that simple.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3 class="feature-title">Activity Tiers</h3>
+                <p class="feature-description">Casual walker or marathon runner? Get matched with people at your level. Compete against 5k steppers if you average 5k. Fair fights only.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Rank Progression</h3>
+                <p class="feature-description">Bronze → Silver → Gold → Platinum → Diamond → Elite. Each promotion unlocked through consistent wins. No shortcuts. Just movement.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔥</div>
+                <h3 class="feature-title">Streaks & Achievements</h3>
+                <p class="feature-description">Daily streaks. Weekly milestones. Seasonal challenges. Track your progress with achievements that actually mean something.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3 class="feature-title">Social Competition</h3>
+                <p class="feature-description">Add friends. Track rivals. See where you stand. Friendly leaderboards make every step count toward bragging rights.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">✅</div>
+                <h3 class="feature-title">Verified Movement</h3>
+                <p class="feature-description">HealthKit integration means real steps only. Anti-cheat systems keep it fair. No shake-to-win exploits here.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competition Showcase -->
+    <section class="competition-showcase">
+        <div class="showcase-content">
+            <div class="showcase-text">
+                <h2>Every Week Is a New Battle</h2>
+                <p>Monday morning, you wake up in a league of 20. <span class="highlight">Top 4 move up a rank.</span> Middle 12 stay put. <span class="highlight">Bottom 4 get demoted.</span></p>
+                <p>It's simple math: walk more than your opponents, climb the ladder. Slack off, fall behind.</p>
+                <p>The competition resets every week. New faces. New stakes. Same goal: <span class="highlight">finish in the promotion zone.</span></p>
+            </div>
+
+            <div class="league-preview float">
+                <div class="league-header">YOUR LEAGUE</div>
+                <div class="league-title">Casual Bronze</div>
+                
+                <div class="rank-item">
+                    <div class="rank-left">
+                        <div class="rank-number">1</div>
+                        <div class="rank-username">steady_steps</div>
+                    </div>
+                    <div class="rank-steps">28.7k</div>
+                </div>
+
+                <div class="rank-item">
+                    <div class="rank-left">
+                        <div class="rank-number">2</div>
+                        <div class="rank-username">daily_rush</div>
+                    </div>
+                    <div class="rank-steps">26.3k</div>
+                </div>
+
+                <div class="rank-item">
+                    <div class="rank-left">
+                        <div class="rank-number">3</div>
+                        <div class="rank-username">peak_path</div>
+                    </div>
+                    <div class="rank-steps">25.8k</div>
+                </div>
+
+                <div class="rank-item">
+                    <div class="rank-left">
+                        <div class="rank-number">4</div>
+                        <div class="rank-username">daily_mover</div>
+                    </div>
+                    <div class="rank-steps">25.7k</div>
+                </div>
+
+                <div class="promotion-zone">▲ PROMOTION ZONE ▲</div>
+
+                <div class="rank-item" style="opacity: 0.6;">
+                    <div class="rank-left">
+                        <div class="rank-number">5</div>
+                        <div class="rank-username">solar_stride</div>
+                    </div>
+                    <div class="rank-steps">25.5k</div>
+                </div>
+
+                <div class="rank-item" style="opacity: 0.4;">
+                    <div class="rank-left">
+                        <div class="rank-number">20</div>
+                        <div class="rank-username">You</div>
+                    </div>
+                    <div class="rank-steps">13.1k</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="screenshots">
+        <div class="section-header">
+            <h2 class="section-title">See It In Action</h2>
+            <p class="section-subtitle">Built for iPhone. Designed for competition.</p>
+        </div>
+
+        <div class="screenshots-grid">
+            <div class="screenshot">
+                <div class="screenshot-placeholder">
+                    Home Screen<br>Daily Progress
+                </div>
+            </div>
+            <div class="screenshot">
+                <div class="screenshot-placeholder">
+                    League Standings<br>Your Rank
+                </div>
+            </div>
+            <div class="screenshot">
+                <div class="screenshot-placeholder">
+                    Activity Tracking<br>Weekly Stats
+                </div>
+            </div>
+            <div class="screenshot">
+                <div class="screenshot-placeholder">
+                    Social Features<br>Friends & Rivals
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta-section" id="notify">
+        <h2>Ready to Compete?</h2>
+        <p>Step Wars Challenge launches soon on the App Store.</p>
+        <a href="mailto:support@stepwarschallenge.com?subject=Notify%20Me%20at%20Launch" class="btn-primary">Get Notified at Launch</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Step Wars Challenge</h3>
+                <p style="color: #86868b; font-size: 14px;">Turn your daily steps into weekly competition. Climb the ranks through verified movement.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Product</h3>
+                <ul>
+                    <li><a href="#features">How It Works</a></li>
+                    <li><a href="#notify">Get Notified</a></li>
+                    <li><a href="mailto:support@stepwarschallenge.com">Contact Support</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="support.html">Support</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Developer</h3>
+                <ul>
+                    <li><a href="mailto:support@stepwarschallenge.com">Tyler Arii</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Tyler Arii. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
